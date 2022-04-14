@@ -5,12 +5,14 @@ sg.theme('random')
 
 # Inicio da tab de calculos de moedas
 
-layout_moedas = 	[	[sg.InputText('R$ 0,00', text_color='green', justification='r', size=(None, None),readonly=True, key='-DISPLAY_C-')],
-						[sg.Text('R$ 0,05', background_color='white', text_color='green' ,justification='c', size=(7, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN005-'), sg.Text('='), sg.Text('', background_color='white', text_color='green', size=(15, 1), justification='r', key='-OUT005-')],
-						[sg.Text('R$ 0,10', background_color='white', text_color='green' ,justification='c', size=(7, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN010-'), sg.Text('='), sg.Text('', background_color='white', text_color='green', size=(15, 1), justification='r', key='-OUT010-')],
-						[sg.Text('R$ 0,25', background_color='white', text_color='green' ,justification='c', size=(7, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN025-'), sg.Text('='), sg.Text('', background_color='white', text_color='green', size=(15, 1), justification='r', key='-OUT025-')],
-						[sg.Text('R$ 0,50', background_color='white', text_color='green' ,justification='c', size=(7, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN050-'), sg.Text('='), sg.Text('', background_color='white', text_color='green', size=(15, 1), justification='r', key='-OUT050-')],
-						[sg.Text('R$ 1,00', background_color='white', text_color='green' ,justification='c', size=(7, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN100-'), sg.Text('='), sg.Text('', background_color='white', text_color='green', size=(15, 1), justification='r', key='-OUT100-')]
+layout_moedas = 	[	[sg.Text()],
+						[sg.InputText('R$ 0,00', text_color='green', justification='r', size=(29, None),readonly=True, key='-DISPLAY_C-', font='_ 14')],
+						[sg.Text('R$ 0,05', background_color='white', text_color='green' ,justification='c', size=(7, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN005-'), sg.Text('='), sg.Text('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', key='-OUT005-')],
+						[sg.Text('R$ 0,10', background_color='white', text_color='green' ,justification='c', size=(7, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN010-'), sg.Text('='), sg.Text('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', key='-OUT010-')],
+						[sg.Text('R$ 0,25', background_color='white', text_color='green' ,justification='c', size=(7, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN025-'), sg.Text('='), sg.Text('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', key='-OUT025-')],
+						[sg.Text('R$ 0,50', background_color='white', text_color='green' ,justification='c', size=(7, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN050-'), sg.Text('='), sg.Text('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', key='-OUT050-')],
+						[sg.Text('R$ 1,00', background_color='white', text_color='green' ,justification='c', size=(7, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN100-'), sg.Text('='), sg.Text('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', key='-OUT100-')],
+						[sg.Text()]
 					]
 # fim da tab de calculos de moedas
 
@@ -57,15 +59,21 @@ while True:
 		break
 
 # Eventos da tab 01
+	# Incio da logica do campo de R$ 0,00
 	if event == '-IN005-' and len(values['-IN005-']) and values['-IN005-'][-1] not in ('0123456789'):
 		window['-IN005-'].update(values['-IN005-'][:-1])
-		
-		window['-OUT005-'].update( calc.str_real_format( calc.insert_result( float( values['-IN005-'][:-1] ) * (0.05)	) ))
-		
+	if event == '-IN005-' and len(values['-IN005-']) and values['-IN005-'][-1] in ('0123456789'):
+		if (len(values['-IN005-']) > 8):
+			window['-IN005-'].update(values['-IN005-'][:-1])
+		if (len(values['-IN005-']) < 9):	
+			window['-OUT005-'].update(	calc.str_real_format(	calc.insert_result(	float( values['-IN005-']) * (0.05)	)))
+	if values['-IN005-'] == '':
+		window['-OUT005-'].update('R$ 0,00')
+
+	# Fim da logica do campo de R$ 0,00
 
 
-
-		window['-DISPLAY_C-'].update( calc.str_real_format( calc.insert_result(	float( values['-IN005-'][:-1] ) * (0.05)	)))
+		#window['-DISPLAY_C-'].update(	calc.str_real_format(	calc.insert_result(	float(	values['-IN005-'][:-1] ) * (0.05)	)))
 
 
 
