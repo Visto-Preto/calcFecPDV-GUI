@@ -37,24 +37,25 @@ layout_cedulas = [
 # Inicio da tab de calculos do PDV
 
 
-layout_recibos = [	[sg.Text('Recibos', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
-					[sg.Text('Venda avista', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
-					[sg.Text('Venda a prazo', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
-					[sg.Text('Cartão', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
-					[sg.Text('Carta crédito', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
-					[sg.Input('Total de todos Recidos', text_color='green', justification='r', expand_x=True, disabled=True, )],
-					[sg.Input('Total de Recidos em dinheiro', text_color='green', justification='r', expand_x=True, disabled=True)]
+layout_recibos = [	[sg.Text('Recibos', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Text('Venda avista', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Text('Venda a prazo', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Text('Cartão', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Text('Carta crédito', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True,size=(26, 1), expand_x=True)],
+					[sg.Text( 'Total Recebido', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', size=(26, 1), expand_x=True, disabled=True, )],
+					[sg.Text( 'Total Dinheiro', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', size=(26, 1), expand_x=True, disabled=True)]
 
 				]
 layout_calc = [
-					[sg.Text('Cédulas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
-					[sg.Text('Moedas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
-					[sg.Text('Despesas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
-					[sg.Text('Saidas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
-					[sg.Text('Trocados', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
-					[sg.Input('Valor total de dinheiro do caixa', text_color='green', justification='r', disabled=True, expand_x=True)],
-					[sg.Input('Resultado', background_color='white', text_color='green', justification='r', expand_x=True,  disabled=True, key='-DISPLAY_C-', font='_ 15')],
-					[sg.Button('Imprimir')]	]
+					[sg.Text('Cédulas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Text('Moedas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Text('Despesas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Text('Saidas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Text('Trocados', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Text( 'Total Recebido', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Text( 'Total Dinheiro', size=(15, 1), expand_x=True), sg.Input('R$ 0,00', text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+					[sg.Input('R$ 0,00', background_color='white', text_color='green', justification='r', expand_x=True,  disabled=True, key='-DISPLAY_C-', font='_ 15')],
+					[sg.Button('Imprimir', size=(7, 1), expand_x=True), sg.Button('Vizualizar', size=(7, 1), expand_x=True), sg.Button('Salvar', size=(7, 1), expand_x=True)]	]
 
 # Fim da tab de calculos do PDV
 
@@ -79,10 +80,10 @@ layout_menu = [	['Arquivo', ['Abrir','Salvar', 'Configs', 'Sair']],
 
 layout = [ 	[sg.Menu(layout_menu)],
 			[sg.TabGroup(layout_tab_group, expand_x=True, expand_y=True)],
-			[sg.Text('Desenvolvido por Leonardo Sousa')], 
-			[sg.Button('Sair')] ] 
+			[sg.Text('Adm', background_color='white', text_color='green' ,justification='c', size=(5, 1), expand_x=False), sg.Text('Gerente', background_color='white', text_color='green' ,justification='c', size=(10, 1), expand_x=True), sg.Text('Leonardo', background_color='white', text_color='green' ,justification='c', size=(20, 1), expand_x=True)]
+			 ] 
 
-window = sg.Window('Terminal: Adm | Usuário: Leonardo', size=(350,325), resizable=False, layout=layout ) 
+window = sg.Window('Terminal: Adm | Usuário: Leonardo', size=(350,320), resizable=True, layout=layout ) 
 while True: 
 
 
