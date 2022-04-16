@@ -82,7 +82,7 @@ layout = [ 	[sg.Menu(layout_menu)],
 			[sg.Text('Desenvolvido por Leonardo Sousa')], 
 			[sg.Button('Sair')] ] 
 
-window = sg.Window('Terminal: Adm | Usuário: Leonardo', size=(350,350), resizable=False, layout=layout ) 
+window = sg.Window('Terminal: Adm | Usuário: Leonardo', size=(350,325), resizable=False, layout=layout ) 
 while True: 
 
 
