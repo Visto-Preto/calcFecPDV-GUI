@@ -17,7 +17,7 @@ from module import calc
 import configparser
 
 cfg = configparser.ConfigParser()
-cfg.read('D:\Leo s files\Projects Leo\Projects\Calculadora\configs.ini')
+cfg.read('configs.ini')
 
 sg.theme(cfg.get('configs', 'tema'))
 
