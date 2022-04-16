@@ -7,12 +7,12 @@ sg.theme('random')
 # Inicio da tab de calculos de moedas
 
 layout_moedas = 	[	
-						[sg.Input('R$ 0,00', background_color='white', text_color='green', justification='r', size=(28, 1),  disabled=True, key='-DISPLAY_M-', font='_ 15')],
-						[sg.Text('R$   0,05', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN005-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', disabled=True, key='-OUT005-')],
-						[sg.Text('R$   0,10', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN010-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', disabled=True, key='-OUT010-')],
-						[sg.Text('R$   0,25', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN025-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', disabled=True, key='-OUT025-')],
-						[sg.Text('R$   0,50', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN050-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', disabled=True, key='-OUT050-')],
-						[sg.Text('R$   1,00', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN100-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', disabled=True, key='-OUT100-')]
+						[sg.Input('R$ 0,00', background_color='white', text_color='green', justification='r', expand_x=True,  disabled=True, key='-DISPLAY_M-', font='_ 15')],
+						[sg.Text('R$   0,05', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True,  enable_events=True, key='-IN005-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r', disabled=True, key='-OUT005-')],
+						[sg.Text('R$   0,10', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN010-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r', disabled=True, key='-OUT010-')],
+						[sg.Text('R$   0,25', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN025-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r', disabled=True, key='-OUT025-')],
+						[sg.Text('R$   0,50', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN050-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r', disabled=True, key='-OUT050-')],
+						[sg.Text('R$   1,00', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN100-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r', disabled=True, key='-OUT100-')],
 
 					]
 # fim da tab de calculos de moedas
@@ -21,37 +21,55 @@ layout_moedas = 	[
 # Inicio da tab de calculos de cedulas
 
 layout_cedulas = [	
-					[sg.Input('R$ 0,00', background_color='white', text_color='green', justification='r', size=(28, 1),  disabled=True, key='-DISPLAY_C-', font='_ 15')],
-					[sg.Text('R$   2,00', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN200-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', readonly=True, key='-OUT200-')],
-					[sg.Text('R$   5,00', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN500-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', readonly=True, key='-OUT500-')],
-					[sg.Text('R$  10,00', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN1000-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', readonly=True, key='-OUT1000-')],
-					[sg.Text('R$  20,00', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN2000-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', readonly=True, key='-OUT2000-')],
-					[sg.Text('R$  50,00', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN5000-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', readonly=True, key='-OUT5000-')],
-					[sg.Text('R$ 100,00', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN10000-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', readonly=True, key='-OUT10000-')],
-					[sg.Text('R$ 200,00', background_color='white', text_color='green' ,justification='c', size=(8, 1)), sg.Text('X'), sg.InputText('', justification='r', size=(10, 1), enable_events=True, key='-IN20000-'), sg.Text('='), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), justification='r', readonly=True, key='-OUT20000-')]
+					[sg.Input('R$ 0,00', background_color='white', text_color='green', justification='r', expand_x=True,  disabled=True, key='-DISPLAY_C-', font='_ 15')],
+					[sg.Text('R$   2,00', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN200-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), expand_x=True, justification='r', readonly=True, key='-OUT200-')],
+					[sg.Text('R$   5,00', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN500-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), expand_x=True, justification='r', readonly=True, key='-OUT500-')],
+					[sg.Text('R$  10,00', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN1000-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), expand_x=True, justification='r', readonly=True, key='-OUT1000-')],
+					[sg.Text('R$  20,00', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN2000-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), expand_x=True, justification='r', readonly=True, key='-OUT2000-')],
+					[sg.Text('R$  50,00', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN5000-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), expand_x=True, justification='r', readonly=True, key='-OUT5000-')],
+					[sg.Text('R$ 100,00', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN10000-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), expand_x=True, justification='r', readonly=True, key='-OUT10000-')],
+					[sg.Text('R$ 200,00', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.InputText('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN20000-'), sg.Text('=', expand_x=True, justification='c'), sg.Input('R$ 0,00', background_color='white', text_color='green', size=(15, 1), expand_x=True, justification='r', readonly=True, key='-OUT20000-')]
 
 					]
 
 # fim da tab de calculos de cedulas
 
+# Inicio da tab de calculos do PDV
 
 
-layout_calc = [	[sg.Text('Menu de tab 03')],
-					[sg.Button('Click Aqui')]	]
+layout_recibos = [	[sg.Text('Recibos', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
+					[sg.Text('Venda avista', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
+					[sg.Text('Venda a prazo', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
+					[sg.Text('Cartão', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
+					[sg.Text('Carta crédito', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
+					[sg.Input('Total de todos Recidos', text_color='green', justification='r', expand_x=True, disabled=True, )],
+					[sg.Input('Total de Recidos em dinheiro', text_color='green', justification='r', expand_x=True, disabled=True)]
 
-layout_config = [	[sg.Text('Menu de tab 04')],
-					[sg.Button('Click Aqui')]	]
+				]
+layout_calc = [
+					[sg.Text('Cédulas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
+					[sg.Text('Moedas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
+					[sg.Text('Despesas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
+					[sg.Text('Saidas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
+					[sg.Text('Trocados', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input('', size=(26, 1), expand_x=True)],
+					[sg.Input('Valor total de dinheiro do caixa', text_color='green', justification='r', disabled=True, expand_x=True)],
+					[sg.Input('Resultado', background_color='white', text_color='green', justification='r', expand_x=True,  disabled=True, key='-DISPLAY_C-', font='_ 15')],
+					[sg.Button('Imprimir')]	]
+
+# Fim da tab de calculos do PDV
+
+
 
 
 layout_tab_group = [	[	sg.Tab('Moedas', layout_moedas), 
 							sg.Tab('Cédulas', layout_cedulas),
-							sg.Tab('Calculos PDV', layout_calc),
-							sg.Tab('Configurações', layout_config)	]]
+							sg.Tab('Recibos', layout_recibos),
+							sg.Tab('Calculos PDV', layout_calc)	]]
 
 
 
 
-layout_menu = [	['Arquivo', ['Abrir','Salvar', 'Sair']],
+layout_menu = [	['Arquivo', ['Abrir','Salvar', 'Configs', 'Sair']],
 				['Temas', sg.theme()],
 				['Calculadora'],
 				['Sobre']	]
@@ -60,11 +78,11 @@ layout_menu = [	['Arquivo', ['Abrir','Salvar', 'Sair']],
 
 
 layout = [ 	[sg.Menu(layout_menu)],
-			[sg.TabGroup(layout_tab_group)],
+			[sg.TabGroup(layout_tab_group, expand_x=True, expand_y=True)],
 			[sg.Text('Desenvolvido por Leonardo Sousa')], 
 			[sg.Button('Sair')] ] 
 
-window = sg.Window('Fechamento de Caixa', layout) 
+window = sg.Window('Terminal: Adm | Usuário: Leonardo', size=(350,350), resizable=False, layout=layout ) 
 while True: 
 
 
