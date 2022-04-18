@@ -31,11 +31,11 @@ def main():
 	layout_moedas = 	[	
 							[sg.Text(valor, background_color='white', text_color='green', justification='r', expand_x=True, key='-DISPLAY_M-', font='_ 15')],
 							[ sg.HorizontalSeparator()],
-							[sg.Text('R$   0,05', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, focus=True,  enable_events=True, key='-IN005-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r', key='-OUT005-')],
-							[sg.Text('R$   0,10', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True,  enable_events=True, key='-IN010-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r',  key='-OUT010-')],
-							[sg.Text('R$   0,25', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN025-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r',  key='-OUT025-')],
-							[sg.Text('R$   0,50', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN050-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r',  key='-OUT050-')],
-							[sg.Text('R$   1,00', background_color='white', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN100-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r',  key='-OUT100-')],
+							[sg.Text('R$   0,05', background_color='#B8B8B8', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, focus=True,  enable_events=True, key='-IN005-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r', key='-OUT005-')],
+							[sg.Text('R$   0,10', background_color='#B8B8B8', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True,  enable_events=True, key='-IN010-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r',  key='-OUT010-')],
+							[sg.Text('R$   0,25', background_color='#B8B8B8', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN025-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r',  key='-OUT025-')],
+							[sg.Text('R$   0,50', background_color='#B8B8B8', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN050-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r',  key='-OUT050-')],
+							[sg.Text('R$   1,00', background_color='#B8B8B8', text_color='green' ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN100-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color='white', text_color='green', size=(20, 1), expand_x=True, justification='r',  key='-OUT100-')],
 
 						]
 
@@ -54,28 +54,28 @@ def main():
 						]
 
 	# Inicio da tab de calculos dos Recibos
-	layout_recibos = [	[sg.Text('Recibos', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', size=(26, 1), expand_x=True)],
-						[sg.Text('Venda avista', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', size=(26, 1), expand_x=True)],
-						[sg.Text('Venda a prazo', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r',size=(26, 1), expand_x=True)],
-						[sg.Text('Cartão', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', size=(26, 1), expand_x=True)],
-						[sg.Text('Carta crédito', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', size=(26, 1), expand_x=True)],
+	layout_recibos = [	[sg.Text('Recibos', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text('Venda avista', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text('Venda a prazo', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color='white', text_color='green', justification='r',size=(26, 1), expand_x=True)],
+						[sg.Text('Cartão', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text('Carta crédito', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
 						[ sg.HorizontalSeparator()],
-						[sg.Text( 'Total Recebido', size=(15, 1), expand_x=True), sg.Text(valor, text_color='green', justification='r', size=(26, 1), expand_x=True)],
-						[sg.Text( 'Total Dinheiro', size=(15, 1), expand_x=True), sg.Text(valor, text_color='green', justification='r', size=(26, 1), expand_x=True)]
+						[sg.Text( 'Total Recebido', size=(15, 1), expand_x=True), sg.Text(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text( 'Total Dinheiro', size=(15, 1), expand_x=True), sg.Text(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)]
 						]
 	
 	# Inicio da tab de calculos do PDV
 	layout_calc = [
-						[sg.Text('Cédulas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
-						[sg.Text('Moedas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
-						[sg.Text('Despesas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
-						[sg.Text('Saidas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
-						[sg.Text('Trocados', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+						[sg.Text('Cédulas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text('Moedas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text('Despesas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text('Saidas', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text('Trocados', background_color='white', text_color='green' ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color='white', text_color='green', justification='r',  size=(26, 1), expand_x=True)],
 						[ sg.HorizontalSeparator()],
-						[sg.Text( 'Total Recebido', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
-						[sg.Text( 'Total Dinheiro', size=(15, 1), expand_x=True), sg.Input(valor, text_color='green', justification='r', disabled=True, size=(26, 1), expand_x=True)],
+						[sg.Text( 'Total Recebido', size=(15, 1), expand_x=True), sg.Text(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text( 'Total Dinheiro', size=(15, 1), expand_x=True), sg.Text(valor, background_color='white', text_color='green', justification='r', size=(26, 1), expand_x=True)],
 						[ sg.HorizontalSeparator()],
-						[sg.Input(valor, background_color='white', text_color='green', justification='r', expand_x=True,  disabled=True, key='-DISPLAY_C-', font='_ 15')],
+						[sg.Text(valor, background_color='white', text_color='green', justification='r', expand_x=True, key='-DISPLAY_C-', font='_ 15')],
 						[sg.Button('Imprimir', size=(7, 1), expand_x=True), sg.Button('Vizualizar', size=(7, 1), expand_x=True), sg.Button('Salvar', size=(7, 1), expand_x=True)]	]
 
 
@@ -93,7 +93,7 @@ def main():
 
 	layout = [ 	[sg.Menu(layout_menu)],
 				[sg.TabGroup(layout_tab_group, expand_x=True, expand_y=True)],
-				[sg.Text('Adm', background_color='white', text_color='green' ,justification='c', size=(5, 1), expand_x=False), sg.Text('Gerente', background_color='white', text_color='green' ,justification='c', size=(10, 1), expand_x=True), sg.Text('Leonardo', background_color='white', text_color='green' ,justification='c', size=(20, 1), expand_x=True)]
+				[sg.StatusBar('Adm', justification='c', size=(5, 1), expand_x=False), sg.StatusBar('Gerente', justification='c', size=(10, 1), expand_x=True), sg.StatusBar('Leonardo', justification='c', size=(20, 1), expand_x=True)]
 				] 
 
 	return sg.Window('Terminal: Adm | Usuário: Leonardo', size=(350,335), resizable=False, layout=layout, use_default_focus=False) 
@@ -193,9 +193,9 @@ while True:
 	if event == '-IN200-' and len(values['-IN200-']) and values['-IN200-'][-1] not in ('0123456789'):
 		window['-IN200-'].update(values['-IN200-'][:-1])
 	if event == '-IN200-' and len(values['-IN200-']) and values['-IN200-'][-1] in ('0123456789'):
-		if (len(values['-IN200-']) > 7):
+		if (len(values['-IN200-']) > 6):
 			window['-IN200-'].update(values['-IN200-'][:-1])
-		if (len(values['-IN200-']) < 8):	
+		if (len(values['-IN200-']) < 7):	
 			f = calc.str_real_format( calc.insert_result(	float( values['-IN200-']) * (2.00)	) )
 			window['-OUT200-'].update( f )
 			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
@@ -209,9 +209,9 @@ while True:
 	if event == '-IN500-' and len(values['-IN500-']) and values['-IN500-'][-1] not in ('0123456789'):
 		window['-IN500-'].update(values['-IN500-'][:-1])
 	if event == '-IN500-' and len(values['-IN500-']) and values['-IN500-'][-1] in ('0123456789'):
-		if (len(values['-IN500-']) > 7):
+		if (len(values['-IN500-']) > 6):
 			window['-IN500-'].update(values['-IN500-'][:-1])
-		if (len(values['-IN500-']) < 8):	
+		if (len(values['-IN500-']) < 7):	
 			g = calc.str_real_format( calc.insert_result(	float( values['-IN500-']) * (5.00)	) )
 			window['-OUT500-'].update( g )
 			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
@@ -225,9 +225,9 @@ while True:
 	if event == '-IN1000-' and len(values['-IN1000-']) and values['-IN1000-'][-1] not in ('0123456789'):
 		window['-IN1000-'].update(values['-IN1000-'][:-1])
 	if event == '-IN1000-' and len(values['-IN1000-']) and values['-IN1000-'][-1] in ('0123456789'):
-		if (len(values['-IN1000-']) > 7):
+		if (len(values['-IN1000-']) > 6):
 			window['-IN1000-'].update(values['-IN1000-'][:-1])
-		if (len(values['-IN1000-']) < 8):	
+		if (len(values['-IN1000-']) < 7):	
 			h = calc.str_real_format( calc.insert_result(	float( values['-IN1000-']) * (10.00)	) )
 			window['-OUT1000-'].update( h )
 			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
@@ -242,9 +242,9 @@ while True:
 	if event == '-IN2000-' and len(values['-IN2000-']) and values['-IN2000-'][-1] not in ('0123456789'):
 		window['-IN2000-'].update(values['-IN2000-'][:-1])
 	if event == '-IN2000-' and len(values['-IN2000-']) and values['-IN2000-'][-1] in ('0123456789'):
-		if (len(values['-IN2000-']) > 7):
+		if (len(values['-IN2000-']) > 5):
 			window['-IN2000-'].update(values['-IN2000-'][:-1])
-		if (len(values['-IN2000-']) < 8):	
+		if (len(values['-IN2000-']) < 6):	
 			i = calc.str_real_format( calc.insert_result(	float( values['-IN2000-']) * (20.00)	) )
 			window['-OUT2000-'].update( i )
 			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
@@ -257,9 +257,9 @@ while True:
 	if event == '-IN5000-' and len(values['-IN5000-']) and values['-IN5000-'][-1] not in ('0123456789'):
 		window['-IN5000-'].update(values['-IN5000-'][:-1])
 	if event == '-IN5000-' and len(values['-IN5000-']) and values['-IN5000-'][-1] in ('0123456789'):
-		if (len(values['-IN5000-']) > 7):
+		if (len(values['-IN5000-']) > 5):
 			window['-IN5000-'].update(values['-IN5000-'][:-1])
-		if (len(values['-IN5000-']) < 8):	
+		if (len(values['-IN5000-']) < 6):	
 			j = calc.str_real_format( calc.insert_result(	float( values['-IN5000-']) * (50.00)	) )
 			window['-OUT5000-'].update( j )
 			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
@@ -273,9 +273,9 @@ while True:
 	if event == '-IN10000-' and len(values['-IN10000-']) and values['-IN10000-'][-1] not in ('0123456789'):
 		window['-IN10000-'].update(values['-IN10000-'][:-1])
 	if event == '-IN10000-' and len(values['-IN10000-']) and values['-IN10000-'][-1] in ('0123456789'):
-		if (len(values['-IN10000-']) > 7):
+		if (len(values['-IN10000-']) > 5):
 			window['-IN10000-'].update(values['-IN10000-'][:-1])
-		if (len(values['-IN10000-']) < 8):	
+		if (len(values['-IN10000-']) < 6):	
 			k = calc.str_real_format( calc.insert_result(	float( values['-IN10000-']) * (100.00)	) )
 			window['-OUT10000-'].update( k )
 			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
@@ -289,9 +289,9 @@ while True:
 	if event == '-IN20000-' and len(values['-IN20000-']) and values['-IN20000-'][-1] not in ('0123456789'):
 		window['-IN20000-'].update(values['-IN20000-'][:-1])
 	if event == '-IN20000-' and len(values['-IN20000-']) and values['-IN20000-'][-1] in ('0123456789'):
-		if (len(values['-IN20000-']) > 7):
+		if (len(values['-IN20000-']) > 4):
 			window['-IN20000-'].update(values['-IN20000-'][:-1])
-		if (len(values['-IN20000-']) < 8):	
+		if (len(values['-IN20000-']) < 5):	
 			l = calc.str_real_format( calc.insert_result(	float( values['-IN20000-']) * (200.00)	) )
 			window['-OUT20000-'].update( l )
 			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
@@ -301,7 +301,6 @@ while True:
 		window['-OUT20000-'].update(valor)
 
 # Eventos da tab 03
-
 
 
 window.close(); del window
