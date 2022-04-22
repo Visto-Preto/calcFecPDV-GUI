@@ -1,7 +1,7 @@
 
+from unittest import TextTestRunner
 import PySimpleGUI as sg 
 from module import calc
-
 
 sg.theme('random')
 
@@ -25,17 +25,35 @@ def real(x):
 def soma(x):
 	return calc.float_calc_format(x)
 
+def MyI(key): return sg.Input('', justification='r', size=(10, 1),  expand_x=True, key=key)
+
+def MyT(key): return sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(20, 1), expand_x=True, justification='r', key=key)
+
+def next_element(key):
+	if key <= 15:
+		if key < 15:
+			next_elem = window[key+1]
+			next_elem.set_focus()
+		else:
+			window[11].set_focus()
+	elif key >= 16:
+		if key < 22:
+			next_elem = window[key+1]
+			next_elem.set_focus()
+		else:
+			window[16].set_focus()
+
 def main():
 	
 	# Inicio da tab de calculos de moedas
 	layout_moedas = 	[	
 							[sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', expand_x=True, key='-DISPLAY_M-', font='_ 15')],
 							[ sg.HorizontalSeparator()],
-							[sg.Text('R$   0,05', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, focus=True,  enable_events=True, key='-IN005-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(20, 1), expand_x=True, justification='r', key='-OUT005-')],
-							[sg.Text('R$   0,10', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True,  enable_events=True, key='-IN010-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(20, 1), expand_x=True, justification='r',  key='-OUT010-')],
-							[sg.Text('R$   0,25', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN025-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(20, 1), expand_x=True, justification='r',  key='-OUT025-')],
-							[sg.Text('R$   0,50', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN050-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(20, 1), expand_x=True, justification='r',  key='-OUT050-')],
-							[sg.Text('R$   1,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN100-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(20, 1), expand_x=True, justification='r',  key='-OUT100-')],
+							[sg.Text('R$   0,05', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, focus=True,key=11), sg.Text('=', expand_x=True, justification='c'), MyT(111) ],
+							[sg.Text('R$   0,10', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(12), sg.Text('=', expand_x=True, justification='c'), MyT(112) ],
+							[sg.Text('R$   0,25', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(13), sg.Text('=', expand_x=True, justification='c') , MyT(113) ],
+							[sg.Text('R$   0,50', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(14), sg.Text('=', expand_x=True, justification='c') , MyT(114) ],
+							[sg.Text('R$   1,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(15), sg.Text('=', expand_x=True, justification='c') , MyT(115) ],
 
 						]
 
@@ -43,13 +61,13 @@ def main():
 	layout_cedulas = [	
 						[sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', expand_x=True, key='-DISPLAY_C-', font='_ 15')],
 						[ sg.HorizontalSeparator()],
-						[sg.Text('R$   2,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN200-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(15, 1), expand_x=True, justification='r', key='-OUT200-')],
-						[sg.Text('R$   5,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN500-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(15, 1), expand_x=True, justification='r', key='-OUT500-')],
-						[sg.Text('R$  10,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN1000-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(15, 1), expand_x=True, justification='r', key='-OUT1000-')],
-						[sg.Text('R$  20,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN2000-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(15, 1), expand_x=True, justification='r', key='-OUT2000-')],
-						[sg.Text('R$  50,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN5000-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(15, 1), expand_x=True, justification='r', key='-OUT5000-')],
-						[sg.Text('R$ 100,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN10000-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(15, 1), expand_x=True, justification='r', key='-OUT10000-')],
-						[sg.Text('R$ 200,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), sg.Input('', justification='r', size=(10, 1),  expand_x=True, enable_events=True, key='-IN20000-'), sg.Text('=', expand_x=True, justification='c'), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), size=(15, 1), expand_x=True, justification='r', key='-OUT20000-')]
+						[sg.Text('R$   2,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(16), sg.Text('=', expand_x=True, justification='c'), MyT(116)],
+						[sg.Text('R$   5,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(17), sg.Text('=', expand_x=True, justification='c') ,MyT(117)],
+						[sg.Text('R$  10,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(18), sg.Text('=', expand_x=True, justification='c'),MyT(118)],
+						[sg.Text('R$  20,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(19), sg.Text('=', expand_x=True, justification='c') ,MyT(119)],
+						[sg.Text('R$  50,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(20), sg.Text('=', expand_x=True, justification='c'),MyT(120)],
+						[sg.Text('R$ 100,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(21), sg.Text('=', expand_x=True, justification='c') ,MyT(121)],
+						[sg.Text('R$ 200,00', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='c', size=(8,1),expand_x=True), sg.Text('X', expand_x=True, justification='c'), MyI(22), sg.Text('=', expand_x=True, justification='c') ,MyT(122)]
 
 						]
 
@@ -101,214 +119,140 @@ def main():
 window = main()
 
 while True: 
-
-
-# Event Loop 
-	event, values = window.read() 
-
-	if event in (None, 'Sair'): 
+	
+	# Event Loop 
+	event, values = window.read()
+	if event in (None, 'Sair'):
 		break
 
-# Eventos da tab 01
+	elem = window.find_element_with_focus()
+	if elem is not None and len(elem.get()):
+		if elem.get()[-1] not in ('0123456789'):
+			elem.update(	elem.get()[:-1] ) 
 
-	# Incio da logica do campo de R$ 0,05
-	if event == '-IN005-' and len(values['-IN005-']) and values['-IN005-'][-1] not in ('0123456789'):
-		window['-IN005-'].update(values['-IN005-'][:-1])
-	if event == '-IN005-' and len(values['-IN005-']) and values['-IN005-'][-1] in ('0123456789'):	
-		if (len(values['-IN005-']) > 7):
-			window['-IN005-'].update(values['-IN005-'][:-1])
-		if (len(values['-IN005-']) < 8):	
-			a = calc.str_real_format( calc.insert_result(	float( values['-IN005-']) * (0.05)	) )
-			window['-OUT005-'].update( a )
-			window['-DISPLAY_M-'].update( real( soma(a) + soma(b) + soma(c) + soma(d) + soma(e) ))
-	if event == '-IN005-' and values[event] == '':
-		window['-DISPLAY_M-'].update( real( soma( window['-DISPLAY_M-'].get() ) - soma( window['-OUT005-'].get() ) ))
-		a = valor
-		window['-OUT005-'].update(valor)
+	if event in ('0123456789\r') or event ==  'BackSpace:8' :
+		if elem is not None:
+			key = elem.Key
 
-	# Incio da logica do campo de R$ 0,10
-	if event == '-IN010-' and len(values['-IN010-']) and values['-IN010-'][-1] not in ('0123456789'):
-		window['-IN010-'].update(values['-IN010-'][:-1])	
-	if event == '-IN010-' and len(values['-IN010-']) and values['-IN010-'][-1] in ('0123456789'):
-		if (len(values['-IN010-']) > 7):
-			window['-IN010-'].update(values['-IN010-'][:-1])
-		if (len(values['-IN010-']) < 8):	
-			b = calc.str_real_format( calc.insert_result(	float( values['-IN010-']) * (0.10)	))
-			window['-OUT010-'].update( b )
-			window['-DISPLAY_M-'].update( real( soma(a) + soma(b) + soma(c) + soma(d) + soma(e) ))
-	if event == '-IN010-' and values[event] == '':
-		window['-DISPLAY_M-'].update( real( soma( window['-DISPLAY_M-'].get() ) - soma( window['-OUT010-'].get() ) ))
-		b = valor
-		window['-OUT010-'].update(valor)
-		
-	# Incio da logica do campo de R$ 0,25	
-	if event == '-IN025-' and len(values['-IN025-']) and values['-IN025-'][-1] not in ('0123456789'):
-		window['-IN025-'].update(values['-IN025-'][:-1])
-	if event == '-IN025-' and len(values['-IN025-']) and values['-IN025-'][-1] in ('0123456789'):
-		if (len(values['-IN025-']) > 7):
-			window['-IN025-'].update(values['-IN025-'][:-1])
-		if (len(values['-IN025-']) < 8):	
-			c = calc.str_real_format( calc.insert_result(	float( values['-IN025-']) * (0.25)	) )
-			window['-OUT025-'].update( c )
-			window['-DISPLAY_M-'].update( real( soma(a) + soma(b) + soma(c) + soma(d) + soma(e) ))
-	if event == '-IN025-' and values[event] == '':
-		window['-DISPLAY_M-'].update( real( soma( window['-DISPLAY_M-'].get() ) - soma( window['-OUT025-'].get() ) ))
-		c = valor
-		window['-OUT025-'].update(valor)
+			keyout = (key + 100)
 
-	# Incio da logica do campo de R$ 0,50	
-	if event == '-IN050-' and len(values['-IN050-']) and values['-IN050-'][-1] not in ('0123456789'):
-		window['-IN050-'].update(values['-IN050-'][:-1])
-	if event == '-IN050-' and len(values['-IN050-']) and values['-IN050-'][-1] in ('0123456789'):
-		if (len(values['-IN050-']) > 7):
-			window['-IN050-'].update(values['-IN050-'][:-1])
-		if (len(values['-IN050-']) < 8):	
-			d = calc.str_real_format( calc.insert_result(	float( values['-IN050-']) * (0.50)	) )
-			window['-OUT050-'].update( d )
-			window['-DISPLAY_M-'].update( real( soma(a) + soma(b) + soma(c) + soma(d) + soma(e) ))
-	if event == '-IN050-' and values[event] == '':
-		window['-DISPLAY_M-'].update( real( soma( window['-DISPLAY_M-'].get() ) - soma( window['-OUT050-'].get() ) ))
-		d = valor
-		window['-OUT050-'].update(valor)
+			if (len( elem.get() ) > 7):
+				elem.update(	elem.get()[:-1] )
+			elif len( elem.get() ) in range(1, 8):
 
-	# Incio da logica do campo de R$ 1,00	
-	if event == '-IN100-' and len(values['-IN100-']) and values['-IN100-'][-1] not in ('0123456789'):
-		window['-IN100-'].update(values['-IN100-'][:-1])
-	if event == '-IN100-' and len(values['-IN100-']) and values['-IN100-'][-1] in ('0123456789'):
-		if (len(values['-IN100-']) > 7):
-			window['-IN100-'].update(values['-IN100-'][:-1])
-		if (len(values['-IN100-']) < 8):	
-			e = calc.str_real_format( calc.insert_result(	float( values['-IN100-']) * (1.00)	) )
-			window['-OUT100-'].update( e )
-			window['-DISPLAY_M-'].update( real( soma(a) + soma(b) + soma(c) + soma(d) + soma(e) ))
-	if event == '-IN100-' and values[event] == '':
-		window['-DISPLAY_M-'].update( real( soma( window['-DISPLAY_M-'].get() ) - soma( window['-OUT100-'].get() ) ))
-		e = valor
-		window['-OUT100-'].update(valor)
+				if key <= 15:
+				
+					if key == 11:
+						moeda = 0.05
+						a = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( a )
+					elif key == 12:
+						moeda = 0.10
+						b = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( b )
+					elif key == 13:
+						moeda = 0.25
+						c = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( c )
+					elif key == 14:
+						moeda = 0.50
+						d = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( d )
+					elif key == 15:
+						moeda = 1.00
+						e = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( e )
+						
+					window['-DISPLAY_M-'].update( real( soma(a) + soma(b) + soma(c) + soma(d) + soma(e) ))
+					
+					if event == '\r':
+						next_element(key)
 
+				elif key >= 16:
+					if key == 16:
+						moeda = 2.00
+						f = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( f )
+					elif key == 17:
+						moeda = 5.00
+						g = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( g )
+					elif key == 18:
+						moeda = 10.00
+						h = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( h )
+					elif key == 19:
+						moeda = 20.00
+						i = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( i )
+					elif key == 20:
+						moeda = 50.00
+						j = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( j )
+					elif key == 21:
+						moeda = 100.00
+						k = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( k )
+					elif key == 22:
+						moeda = 200.00
+						l = calc.str_real_format( calc.insert_result(	float( values[key]) * moeda	) )
+						window[keyout].update( l )						
 
-# Eventos da tab 02
+					window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
 
-	# Incio da logica do campo de R$ 2,00	
-	if event == '-IN200-' and len(values['-IN200-']) and values['-IN200-'][-1] not in ('0123456789'):
-		window['-IN200-'].update(values['-IN200-'][:-1])
-	if event == '-IN200-' and len(values['-IN200-']) and values['-IN200-'][-1] in ('0123456789'):
-		if (len(values['-IN200-']) > 6):
-			window['-IN200-'].update(values['-IN200-'][:-1])
-		if (len(values['-IN200-']) < 7):	
-			f = calc.str_real_format( calc.insert_result(	float( values['-IN200-']) * (2.00)	) )
-			window['-OUT200-'].update( f )
-			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
-	if event == '-IN200-' and values[event] == '':
-		window['-DISPLAY_C-'].update( real( soma( window['-DISPLAY_C-'].get() ) - soma( window['-OUT200-'].get() ) ))
-		f = valor
-		window['-OUT200-'].update(valor)
+					if event == '\r':
+						next_element(key)
 
+			elif elem.get() == '':
 
-# Incio da logica do campo de R$ 5,00	
-	if event == '-IN500-' and len(values['-IN500-']) and values['-IN500-'][-1] not in ('0123456789'):
-		window['-IN500-'].update(values['-IN500-'][:-1])
-	if event == '-IN500-' and len(values['-IN500-']) and values['-IN500-'][-1] in ('0123456789'):
-		if (len(values['-IN500-']) > 6):
-			window['-IN500-'].update(values['-IN500-'][:-1])
-		if (len(values['-IN500-']) < 7):	
-			g = calc.str_real_format( calc.insert_result(	float( values['-IN500-']) * (5.00)	) )
-			window['-OUT500-'].update( g )
-			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
-	if event == '-IN500-' and values[event] == '':
-		window['-DISPLAY_C-'].update( real( soma( window['-DISPLAY_C-'].get() ) - soma( window['-OUT500-'].get() ) ))
-		g = valor
-		window['-OUT500-'].update(valor)
+				if key <= 15:
+					window['-DISPLAY_M-'].update( real( soma( window['-DISPLAY_M-'].get() ) - soma( window[keyout].get() ) ))
 
+					if key == 11:
+						a = valor
+						window[keyout].update(valor)
+					elif key == 12:
+						b = valor
+						window[keyout].update(valor)
+					elif key == 13:
+						c = valor
+						window[keyout].update(valor)
+					elif key == 14:
+						e = valor
+						window[keyout].update(valor)
+					elif key == 15:
+						e = valor
+						window[keyout].update(valor)
 
-# Incio da logica do campo de R$ 10,00	
-	if event == '-IN1000-' and len(values['-IN1000-']) and values['-IN1000-'][-1] not in ('0123456789'):
-		window['-IN1000-'].update(values['-IN1000-'][:-1])
-	if event == '-IN1000-' and len(values['-IN1000-']) and values['-IN1000-'][-1] in ('0123456789'):
-		if (len(values['-IN1000-']) > 6):
-			window['-IN1000-'].update(values['-IN1000-'][:-1])
-		if (len(values['-IN1000-']) < 7):	
-			h = calc.str_real_format( calc.insert_result(	float( values['-IN1000-']) * (10.00)	) )
-			window['-OUT1000-'].update( h )
-			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
-	if event == '-IN1000-' and values[event] == '':
-		window['-DISPLAY_C-'].update( real( soma( window['-DISPLAY_C-'].get() ) - soma( window['-OUT1000-'].get() ) ))
-		h = valor
-		window['-OUT1000-'].update(valor)
+					if event == '\r':
+						next_element(key)
 
+				elif key > 16:
+					window['-DISPLAY_C-'].update( real( soma( window['-DISPLAY_C-'].get() ) - soma( window[keyout].get() ) ))
+					
+					if key == 16:
+						f = valor
+						window[keyout].update(valor)
+					elif key == 17:
+						g = valor
+						window[keyout].update(valor)
+					elif key == 18:
+						h = valor
+						window[keyout].update(valor)
+					elif key == 19:
+						i = valor
+						window[keyout].update(valor)
+					elif key == 20:
+						j = valor
+						window[keyout].update(valor)
+					elif key == 21:
+						k = valor
+						window[keyout].update(valor)
+					elif key == 22:
+						l = valor
+						window[keyout].update(valor)
 
-
-# Incio da logica do campo de R$ 20,00	
-	if event == '-IN2000-' and len(values['-IN2000-']) and values['-IN2000-'][-1] not in ('0123456789'):
-		window['-IN2000-'].update(values['-IN2000-'][:-1])
-	if event == '-IN2000-' and len(values['-IN2000-']) and values['-IN2000-'][-1] in ('0123456789'):
-		if (len(values['-IN2000-']) > 5):
-			window['-IN2000-'].update(values['-IN2000-'][:-1])
-		if (len(values['-IN2000-']) < 6):	
-			i = calc.str_real_format( calc.insert_result(	float( values['-IN2000-']) * (20.00)	) )
-			window['-OUT2000-'].update( i )
-			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
-	if event == '-IN2000-' and values[event] == '':
-		window['-DISPLAY_C-'].update( real( soma( window['-DISPLAY_C-'].get() ) - soma( window['-OUT2000-'].get() ) ))
-		i = valor
-		window['-OUT2000-'].update(valor)
-
-# Incio da logica do campo de R$ 50,00	
-	if event == '-IN5000-' and len(values['-IN5000-']) and values['-IN5000-'][-1] not in ('0123456789'):
-		window['-IN5000-'].update(values['-IN5000-'][:-1])
-	if event == '-IN5000-' and len(values['-IN5000-']) and values['-IN5000-'][-1] in ('0123456789'):
-		if (len(values['-IN5000-']) > 5):
-			window['-IN5000-'].update(values['-IN5000-'][:-1])
-		if (len(values['-IN5000-']) < 6):	
-			j = calc.str_real_format( calc.insert_result(	float( values['-IN5000-']) * (50.00)	) )
-			window['-OUT5000-'].update( j )
-			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
-	if event == '-IN5000-' and values[event] == '':
-		window['-DISPLAY_C-'].update( real( soma( window['-DISPLAY_C-'].get() ) - soma( window['-OUT5000-'].get() ) ))
-		j = valor
-		window['-OUT5000-'].update(valor)
-
-
-# Incio da logica do campo de R$ 100,00	
-	if event == '-IN10000-' and len(values['-IN10000-']) and values['-IN10000-'][-1] not in ('0123456789'):
-		window['-IN10000-'].update(values['-IN10000-'][:-1])
-	if event == '-IN10000-' and len(values['-IN10000-']) and values['-IN10000-'][-1] in ('0123456789'):
-		if (len(values['-IN10000-']) > 5):
-			window['-IN10000-'].update(values['-IN10000-'][:-1])
-		if (len(values['-IN10000-']) < 6):	
-			k = calc.str_real_format( calc.insert_result(	float( values['-IN10000-']) * (100.00)	) )
-			window['-OUT10000-'].update( k )
-			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
-	if event == '-IN10000-' and values[event] == '':
-		window['-DISPLAY_C-'].update( real( soma( window['-DISPLAY_C-'].get() ) - soma( window['-OUT10000-'].get() ) ))
-		k = valor
-		window['-OUT10000-'].update(valor)
-
-
-# Incio da logica do campo de R$ 200,00	
-	if event == '-IN20000-' and len(values['-IN20000-']) and values['-IN20000-'][-1] not in ('0123456789'):
-		window['-IN20000-'].update(values['-IN20000-'][:-1])
-	if event == '-IN20000-' and len(values['-IN20000-']) and values['-IN20000-'][-1] in ('0123456789'):
-		if (len(values['-IN20000-']) > 4):
-			window['-IN20000-'].update(values['-IN20000-'][:-1])
-		if (len(values['-IN20000-']) < 5):	
-			l = calc.str_real_format( calc.insert_result(	float( values['-IN20000-']) * (200.00)	) )
-			window['-OUT20000-'].update( l )
-			window['-DISPLAY_C-'].update( real( soma(f) + soma(g) + soma(h) + soma(i) + soma(j) + soma(k) + soma(l) ))
-	if event == '-IN20000-' and values[event] == '':
-		window['-DISPLAY_C-'].update( real( soma( window['-DISPLAY_C-'].get() ) - soma( window['-OUT20000-'].get() ) ))
-		l = valor
-		window['-OUT20000-'].update(valor)
-
-# Eventos da tab 03
-
-	if event == '-REC-' and len(values['-REC-']) and values['-REC-'][-1] not in ('0123456789'):
-		window['-REC-'].update(values['-REC-'][:-1])
-	# if event == '-REC-' and len(values['-REC-']) and values['-REC-'][-1] in ('0123456789'):
-	# 	print(values['-REC-'][-1])
-	# 	window['-REC-'].Update( calc.str_real_format( calc.insert_valor( calc.float_calc_format( values['-REC-']), values['-REC-'][-1]) ) )
-	print(event)
-
-
+					if event == '\r':
+						next_element(key)
 
 window.close(); del window
