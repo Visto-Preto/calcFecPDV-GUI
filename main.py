@@ -6,25 +6,7 @@ from module.realsymbol import Real as rs
 
 sg.theme('random')
 
-valor = ' R$ 0,00'
-a = valor
-b = valor
-c = valor
-d = valor
-e = valor
-f = valor
-g = valor
-h = valor
-i = valor
-j = valor
-k = valor
-l = valor
-
-rec = valor
-vda = valor
-vdap = valor
-ca = valor
-cac = valor
+a = b = c = d = e = f = g = h = i = j = k = l = rec = vda = vdap = ca = cac = desp = said = troc = valor = ' R$ 0,00'
 
 def real(x):
 	return calc.str_real_format( calc.insert_result( x))
@@ -73,14 +55,14 @@ def main():
 	
 	# Inicio da tab de calculos do PDV
 	layout_calc = [
-						[sg.Text('Moedas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True)],
-						[sg.Text('Cédulas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True)],
-						[sg.Text('Despesas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True)],
-						[sg.Text('Saidas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True)],
-						[sg.Text('Trocados', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r',  size=(26, 1), expand_x=True)],
+						[sg.Text('Moedas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-MO-')],
+						[sg.Text('Cédulas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-CE-')],
+						[sg.Text('Despesas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), enable_events=True, expand_x=True, key='-DESP-')],
+						[sg.Text('Saidas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), enable_events=True, expand_x=True, key='-SAID-')],
+						[sg.Text('Trocados', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r',  size=(26, 1), enable_events=True, expand_x=True, key='-TROC-')],
 						[ sg.HorizontalSeparator()],
-						[sg.Text( 'Total Recebido', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True)],
-						[sg.Text( 'Total Dinheiro', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text( 'Recebido Caixa', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text( 'Deposito Diário', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-DINPDV-')],
 						[ sg.HorizontalSeparator()],
 						[sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', expand_x=True, key='-DISPLAY_C-', font='_ 15')],
 						[sg.Button('Imprimir', size=(7, 1), expand_x=True), sg.Button('Vizualizar', size=(7, 1), expand_x=True), sg.Button('Salvar', size=(7, 1), expand_x=True)]	]
@@ -369,6 +351,50 @@ while True:
 				cac = values['-CAC-']
 				window['-CAC-'].update( rs.del_caracter(cac) )	
 
+	# Eventos do campo de despesas
+	if event == '-DESP-' and len(values['-DESP-']) and values['-DESP-'][-1] not in ('0123456789'):
+		window['-DESP-'].update(values['-DESP-'][:-1])
+	if event == '-DESP-' and len(values['-DESP-']) and values['-DESP-'][-1] in ('0123456789'):
+		if (len(values['-DESP-']) > 19): # limite maximo de caracter 12
+			window['-DESP-'].update(values['-DESP-'][:-1])
+		if (len(values['-DESP-']) < 20): #
+			if len(values['-DESP-']) == 1:
+				desp = int( values['-DESP-'] )
+				window['-DESP-'].update( rs.float_to_s(desp) )
+			else:
+				desp = values['-DESP-']
+				window['-DESP-'].update( rs.del_caracter(desp) )	
+
+	# Eventos do campo de saidas
+	if event == '-SAID-' and len(values['-SAID-']) and values['-SAID-'][-1] not in ('0123456789'):
+		window['-SAID-'].update(values['-SAID-'][:-1])
+	if event == '-SAID-' and len(values['-SAID-']) and values['-SAID-'][-1] in ('0123456789'):
+		if (len(values['-SAID-']) > 19): # limite maximo de caracter 12
+			window['-SAID-'].update(values['-SAID-'][:-1])
+		if (len(values['-SAID-']) < 20): #
+			if len(values['-SAID-']) == 1:
+				said = int( values['-SAID-'] )
+				window['-SAID-'].update( rs.float_to_s(said) )
+			else:
+				said = values['-SAID-']
+				window['-SAID-'].update( rs.del_caracter(said) )	
+
+	# Eventos do campo trocados
+	if event == '-TROC-' and len(values['-TROC-']) and values['-TROC-'][-1] not in ('0123456789'):
+		window['-TROC-'].update(values['-TROC-'][:-1])
+	if event == '-TROC-' and len(values['-TROC-']) and values['-TROC-'][-1] in ('0123456789'):
+		if (len(values['-TROC-']) > 19): # limite maximo de caracter 12
+			window['-TROC-'].update(values['-TROC-'][:-1])
+		if (len(values['-TROC-']) < 20): #
+			if len(values['-TROC-']) == 1:
+				troc = int( values['-TROC-'] )
+				window['-TROC-'].update( rs.float_to_s(troc) )
+			else:
+				troc = values['-TROC-']
+				window['-TROC-'].update( rs.del_caracter(troc) )	
+
+
+
 	# display somas dos recibos		
 	if type(rec) == int or type(vda) == int or type(vdap) == int or type(ca) == int or type(cac) == int :
 
@@ -424,4 +450,15 @@ while True:
 		window['-DIS_TR-'].update( dstr )
 		window['-DIS_TD-'].update( dstd )
 
+
+
+
+
+
+
+	# display somas pdv
+		window['-MO-'].update( window['-DISPLAY_M-'].get() )
+		window['-CE-'].update( window['-DISPLAY_C-'].get() )
+		window['-DINPDV-'].update( window['-DIS_TD-'].get() )
+	# tab 04
 window.close(); del window
