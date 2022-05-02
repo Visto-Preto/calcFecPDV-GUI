@@ -1,4 +1,5 @@
 
+from tkinter import ALL
 import PySimpleGUI as sg 
 from module import calc
 from module.realsymbol import Real as rs
@@ -7,6 +8,10 @@ from module.realsymbol import Real as rs
 sg.theme('random')
 
 a = b = c = d = e = f = g = h = i = j = k = l = rec = vda = vdap = ca = cac = desp = said = troc = valor = ' R$ 0,00'
+
+terminal = 'Adm'
+func = 'Gerente'
+user = 'Leonardo'
 
 def real(x):
 	return calc.str_real_format( calc.insert_result( x))
@@ -61,10 +66,10 @@ def main():
 						[sg.Text('Saidas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), enable_events=True, expand_x=True, key='-SAID-')],
 						[sg.Text('Trocados', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r',  size=(26, 1), enable_events=True, expand_x=True, key='-TROC-')],
 						[ sg.HorizontalSeparator()],
-						[sg.Text( 'Recebido Caixa', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True)],
+						[sg.Text( 'Recebido Caixa', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-DICA-')],
 						[sg.Text( 'Deposito Diário', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-DINPDV-')],
 						[ sg.HorizontalSeparator()],
-						[sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', expand_x=True, key='-DISPLAY_C-', font='_ 15')],
+						[sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', expand_x=True, key='-RESULT-', font='_ 15')],
 						[sg.Button('Imprimir', size=(7, 1), expand_x=True), sg.Button('Vizualizar', size=(7, 1), expand_x=True), sg.Button('Salvar', size=(7, 1), expand_x=True)]	]
 
 
@@ -82,10 +87,10 @@ def main():
 
 	layout = [ 	[sg.Menu(layout_menu)],
 				[sg.TabGroup(layout_tab_group, expand_x=True, expand_y=True)],
-				[sg.StatusBar('Adm', justification='c', size=(5, 1), expand_x=False), sg.StatusBar('Gerente', justification='c', size=(10, 1), expand_x=True), sg.StatusBar('Leonardo', justification='c', size=(20, 1), expand_x=True)]
+				[sg.StatusBar(terminal, justification='c', size=(5, 1), expand_x=False), sg.StatusBar(func, justification='c', size=(10, 1), expand_x=True), sg.StatusBar(user, justification='c', size=(20, 1), expand_x=True)]
 				] 
 
-	return sg.Window('Terminal: Adm | Usuário: Leonardo', size=(350,335), resizable=False, layout=layout, use_default_focus=False, return_keyboard_events=False) 
+	return sg.Window('Terminal: {} | Usuário: {}'.format(terminal ,user), size=(350,340), resizable=False, layout=layout, use_default_focus=False, return_keyboard_events=False) 
 
 window = main()
 
@@ -98,7 +103,6 @@ while True:
 	if event in (None, 'Sair'): 
 		break
 
-	# Eventos da tab 01
 	# Incio da logica do campo de R$ 0,05
 	if event == '-IN005-' and len(values['-IN005-']) and values['-IN005-'][-1] not in ('0123456789'):
 		window['-IN005-'].update(values['-IN005-'][:-1])
@@ -174,7 +178,6 @@ while True:
 		e = valor
 		window['-OUT100-'].update(valor)
 
-	# Eventos da tab 02
 	# Incio da logica do campo de R$ 2,00	
 	if event == '-IN200-' and len(values['-IN200-']) and values['-IN200-'][-1] not in ('0123456789'):
 		window['-IN200-'].update(values['-IN200-'][:-1])
@@ -280,7 +283,6 @@ while True:
 		l = valor
 		window['-OUT20000-'].update(valor)
 
-	# Eventos da tab 03
 	# Eventos do campo de recibos
 	if event == '-REC-' and len(values['-REC-']) and values['-REC-'][-1] not in ('0123456789'):
 		window['-REC-'].update(values['-REC-'][:-1])
@@ -393,10 +395,8 @@ while True:
 				troc = values['-TROC-']
 				window['-TROC-'].update( rs.del_caracter(troc) )	
 
-
-
-	# display somas dos recibos		
-	if type(rec) == int or type(vda) == int or type(vdap) == int or type(ca) == int or type(cac) == int :
+	# display somas dos recibos e pdv
+	if type(rec) == int or type(vda) == int or type(vdap) == int or type(ca) == int or type(cac) == int or type(desp) == int or type(said) == int or type(troc) == int:
 
 		if type(rec) == int:
 			rec = rs.float_to_s(rec)# int
@@ -424,22 +424,45 @@ while True:
 		else:
 			cac = rs.del_caracter(cac)# float
 
+		if type(desp) == int:
+			desp = rs.float_to_s(desp)# int
+		else:
+			desp = rs.del_caracter(desp)# float
+
+		if type(said) == int:
+			said = rs.float_to_s(said)# int
+		else:
+			said = rs.del_caracter(said)# float
+
+
+		if type(troc) == int:
+			troc = rs.float_to_s(troc)# int
+		else:
+			troc = rs.del_caracter(troc)# float
+
 
 		dstr = ( rs.string_to_f(rec) + rs.string_to_f(vda) + rs.string_to_f(vdap) )
 		dstr = rs.float_to_s(dstr) 
 
 		dstd = ( (rs.string_to_f(rec) + rs.string_to_f(vda) + rs.string_to_f(vdap) ) - (rs.string_to_f(ca) + rs.string_to_f(cac) ) )
 		dstd = rs.float_to_s(dstd) 
-
+		
+		moed = window['-DISPLAY_M-'].get()
+		dica =  ( rs.string_to_f( rs.del_caracter(window['-DISPLAY_M-'].get())) + rs.string_to_f( rs.del_caracter(window['-DISPLAY_C-'].get())) + rs.string_to_f(desp) + rs.string_to_f(said) - rs.string_to_f(troc) )
+		dica = rs.float_to_s(dica)
 
 		window['-DIS_TR-'].update( dstr )
 		window['-DIS_TD-'].update( dstd )
+		window['-DICA-'].update( dica )
 	else:
 		rec = rs.del_caracter(rec)# float
 		vda = rs.del_caracter(vda)# float
 		vdap = rs.del_caracter(vdap)# float
 		ca = rs.del_caracter(ca)# float
 		cac = rs.del_caracter(cac)# float
+		desp = rs.del_caracter(desp)
+		said = rs.del_caracter(said)
+		troc =rs.del_caracter(troc)
 
 		dstr = ( rs.string_to_f(rec) + rs.string_to_f(vda) + rs.string_to_f(vdap))
 		dstr = rs.float_to_s(dstr) 
@@ -447,18 +470,18 @@ while True:
 		dstd = ( (rs.string_to_f(rec) + rs.string_to_f(vda) + rs.string_to_f(vdap) ) - (rs.string_to_f(ca) + rs.string_to_f(cac) ) )
 		dstd = rs.float_to_s(dstd) 
 
+		dica =  ( rs.string_to_f( rs.del_caracter(window['-DISPLAY_M-'].get())) + rs.string_to_f( rs.del_caracter(window['-DISPLAY_C-'].get())) + rs.string_to_f(desp) + rs.string_to_f(said) - rs.string_to_f(troc) )
+		dica = rs.float_to_s(dica)
+
+
 		window['-DIS_TR-'].update( dstr )
 		window['-DIS_TD-'].update( dstd )
+		window['-DICA-'].update( dica )
+
+	window['-MO-'].update( window['-DISPLAY_M-'].get() )
+	window['-CE-'].update( window['-DISPLAY_C-'].get() )
+	window['-DINPDV-'].update( window['-DIS_TD-'].get() )
+	window['-RESULT-'].update( rs.float_to_s( rs.string_to_f( rs.del_caracter(window['-DICA-'].get())) - rs.string_to_f( rs.del_caracter(window['-DINPDV-'].get()))))
 
 
-
-
-
-
-
-	# display somas pdv
-		window['-MO-'].update( window['-DISPLAY_M-'].get() )
-		window['-CE-'].update( window['-DISPLAY_C-'].get() )
-		window['-DINPDV-'].update( window['-DIS_TD-'].get() )
-	# tab 04
 window.close(); del window
