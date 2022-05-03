@@ -7,7 +7,7 @@ from module.realsymbol import Real as rs
 
 sg.theme('random')
 
-a = b = c = d = e = f = g = h = i = j = k = l = rec = vda = vdap = ca = cac = desp = said = troc = valor = ' R$ 0,00'
+a = b = c = d = e = f = g = h = i = j = k = l = rec = vda = vdap = ca = cac = dsp = desp = said = troc = valor = ' R$ 0,00'
 
 terminal = 'Adm'
 func = 'Gerente'
@@ -53,9 +53,12 @@ def main():
 						[sg.Text('Venda a prazo', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r',size=(26, 1), expand_x=True, enable_events=True, key='-VDAP-' )],
 						[sg.Text('Cartão', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, enable_events=True, key='-CA-' )],
 						[sg.Text('Carta crédito', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, enable_events=True, key='-CAC-' )],
+						[sg.Text('Despedas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, enable_events=True, key='-DSP-' )],
 						[ sg.HorizontalSeparator()],
 						[sg.Text( 'Total Recebido', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-DIS_TR-')],
-						[sg.Text( 'Total Dinheiro', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-DIS_TD-')]
+						[sg.Text( 'Total Dinheiro', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-DIS_TD-')],
+						[ sg.HorizontalSeparator()],
+						[sg.Text( 'Depósito diário', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, font='_ 15', key='-DIS_DD-')]
 						]
 	
 	# Inicio da tab de calculos do PDV
@@ -323,7 +326,7 @@ while True:
 				window['-VDAP-'].update( rs.float_to_s(vdap) )
 			else:
 				vdap = values['-VDAP-']
-				window['-VDAP-'].update( rs.del_caracter(vdap) )				
+				window['-VDAP-'].update( rs.del_caracter(vdap) )								
 
 	# Eventos do campo de cartao de credito
 	if event == '-CA-' and len(values['-CA-']) and values['-CA-'][-1] not in ('0123456789'):
@@ -353,7 +356,21 @@ while True:
 				cac = values['-CAC-']
 				window['-CAC-'].update( rs.del_caracter(cac) )	
 
-	# Eventos do campo de despesas
+	# Eventos do campo de despesas dsp
+	if event == '-DSP-' and len(values['-DSP-']) and values['-DSP-'][-1] not in ('0123456789'):
+		window['-DSP-'].update(values['-DSP-'][:-1])
+	if event == '-DSP-' and len(values['-DSP-']) and values['-DSP-'][-1] in ('0123456789'):
+		if (len(values['-DSP-']) > 19): # limite maximo de caracter 12
+			window['-DSP-'].update(values['-DSP-'][:-1])
+		if (len(values['-DSP-']) < 20): #
+			if len(values['-DSP-']) == 1:
+				dsp = int( values['-DSP-'] )
+				window['-DSP-'].update( rs.float_to_s(dsp) )
+			else:
+				dsp = values['-DSP-']
+				window['-DSP-'].update( rs.del_caracter(dsp) )	
+
+	# Eventos do campo de despesas desp
 	if event == '-DESP-' and len(values['-DESP-']) and values['-DESP-'][-1] not in ('0123456789'):
 		window['-DESP-'].update(values['-DESP-'][:-1])
 	if event == '-DESP-' and len(values['-DESP-']) and values['-DESP-'][-1] in ('0123456789'):
@@ -396,7 +413,7 @@ while True:
 				window['-TROC-'].update( rs.del_caracter(troc) )	
 
 	# display somas dos recibos e pdv
-	if type(rec) == int or type(vda) == int or type(vdap) == int or type(ca) == int or type(cac) == int or type(desp) == int or type(said) == int or type(troc) == int:
+	if type(rec) == int or type(vda) == int or type(vdap) == int  or type(ca) == int or type(cac) == int or type(dsp) == int or type(desp) == int or type(said) == int or type(troc) == int:
 
 		if type(rec) == int:
 			rec = rs.float_to_s(rec)# int
@@ -413,7 +430,6 @@ while True:
 		else:
 			vdap = rs.del_caracter(vdap)# float
 
-
 		if type(ca) == int:
 			ca = rs.float_to_s(ca)# int
 		else:
@@ -423,6 +439,11 @@ while True:
 			cac = rs.float_to_s(cac)# int
 		else:
 			cac = rs.del_caracter(cac)# float
+
+		if type(dsp) == int:
+			dsp = rs.float_to_s(dsp)# int
+		else:
+			dsp = rs.del_caracter(dsp)# float
 
 		if type(desp) == int:
 			desp = rs.float_to_s(desp)# int
@@ -447,19 +468,25 @@ while True:
 		dstd = ( (rs.string_to_f(rec) + rs.string_to_f(vda) + rs.string_to_f(vdap) ) - (rs.string_to_f(ca) + rs.string_to_f(cac) ) )
 		dstd = rs.float_to_s(dstd) 
 		
-		moed = window['-DISPLAY_M-'].get()
 		dica =  ( rs.string_to_f( rs.del_caracter(window['-DISPLAY_M-'].get())) + rs.string_to_f( rs.del_caracter(window['-DISPLAY_C-'].get())) + rs.string_to_f(desp) + rs.string_to_f(said) - rs.string_to_f(troc) )
 		dica = rs.float_to_s(dica)
+
+		disdd = rs.string_to_f(rs.del_caracter(dstd)) - rs.string_to_f(dsp)
+		disdd = rs.float_to_s(disdd) 
 
 		window['-DIS_TR-'].update( dstr )
 		window['-DIS_TD-'].update( dstd )
 		window['-DICA-'].update( dica )
+
+		window['-DIS_DD-'].update( disdd )
+
 	else:
 		rec = rs.del_caracter(rec)# float
 		vda = rs.del_caracter(vda)# float
 		vdap = rs.del_caracter(vdap)# float
 		ca = rs.del_caracter(ca)# float
 		cac = rs.del_caracter(cac)# float
+		dsp = rs.del_caracter(dsp)# float
 		desp = rs.del_caracter(desp)
 		said = rs.del_caracter(said)
 		troc =rs.del_caracter(troc)
@@ -473,10 +500,15 @@ while True:
 		dica =  ( rs.string_to_f( rs.del_caracter(window['-DISPLAY_M-'].get())) + rs.string_to_f( rs.del_caracter(window['-DISPLAY_C-'].get())) + rs.string_to_f(desp) + rs.string_to_f(said) - rs.string_to_f(troc) )
 		dica = rs.float_to_s(dica)
 
+		disdd = rs.string_to_f(rs.del_caracter(dstd)) - rs.string_to_f(dsp)
+		disdd = rs.float_to_s(disdd) 
 
 		window['-DIS_TR-'].update( dstr )
 		window['-DIS_TD-'].update( dstd )
 		window['-DICA-'].update( dica )
+
+		window['-DIS_DD-'].update( disdd )
+
 
 	window['-MO-'].update( window['-DISPLAY_M-'].get() )
 	window['-CE-'].update( window['-DISPLAY_C-'].get() )
