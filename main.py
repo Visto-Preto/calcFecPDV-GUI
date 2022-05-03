@@ -1,5 +1,3 @@
-
-from tkinter import ALL
 import PySimpleGUI as sg 
 from module import calc
 from module.realsymbol import Real as rs
@@ -93,7 +91,7 @@ def main():
 				[sg.StatusBar(terminal, justification='c', size=(5, 1), expand_x=False), sg.StatusBar(func, justification='c', size=(10, 1), expand_x=True), sg.StatusBar(user, justification='c', size=(20, 1), expand_x=True)]
 				] 
 
-	return sg.Window('Terminal: {} | Usuário: {}'.format(terminal ,user), size=(350,340), resizable=False, layout=layout, use_default_focus=False, return_keyboard_events=False) 
+	return sg.Window('Terminal: {} | Usuário: {}'.format(terminal ,user),  icon='ico.ico', size=(350,340), resizable=False, layout=layout, use_default_focus=False, return_keyboard_events=False) 
 
 window = main()
 
@@ -105,7 +103,7 @@ while True:
 	print(event)
 	if event in (None, 'Sair'): 
 		break
-
+	
 	# Incio da logica do campo de R$ 0,05
 	if event == '-IN005-' and len(values['-IN005-']) and values['-IN005-'][-1] not in ('0123456789'):
 		window['-IN005-'].update(values['-IN005-'][:-1])
