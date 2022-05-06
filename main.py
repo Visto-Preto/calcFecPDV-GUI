@@ -160,7 +160,7 @@ _________________________________
 												print_values(window['-RESULT-'].get())  ) 
 		print(tmp)
 		lay = [ [sg.Text(tmp, font=('Consolas 11')) ], [sg.Combo(['Impressora Caixa', 'Impressora Cobranca', 'Impressora Gerente'], default_value='Impressora Caixa', expand_x=True, readonly=True), sg.Button('Imprimir')] ]
-		win = sg.Window('Test', lay)
+		win = sg.Window('Página de Impressão', icon='ico.ico', layout=lay)
 		while True:
 			event, values = win.read()
 			if event in (None, sg.WIN_CLOSED):
