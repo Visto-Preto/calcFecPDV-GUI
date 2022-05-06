@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 from module import calc
 from module.realsymbol import Real as rs
 
+#coding: uft-8
 
 sg.theme('random')
 
@@ -16,6 +17,10 @@ def real(x):
 
 def soma(x):
 	return calc.float_calc_format(x)
+
+def print_values(x):
+	x = ((16 - len(x)) * ' ' + x)
+	return x
 
 def main():
 	
@@ -67,11 +72,11 @@ def main():
 						[sg.Text('Saidas', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), enable_events=True, expand_x=True, key='-SAID-')],
 						[sg.Text('Trocados', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color() ,justification='l', size=(15, 1), expand_x=True), sg.Input('', background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r',  size=(26, 1), enable_events=True, expand_x=True, key='-TROC-')],
 						[ sg.HorizontalSeparator()],
-						[sg.Text( 'Recebido Caixa', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-DICA-')],
-						[sg.Text( 'Deposito Diário', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-DINPDV-')],
+						[sg.Text( 'Valor D/ Caixa', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-DICA-')],
+						[sg.Text( 'Total Dinheiro', size=(15, 1), expand_x=True), sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', size=(26, 1), expand_x=True, key='-DINPDV-')],
 						[ sg.HorizontalSeparator()],
 						[sg.Text(valor, background_color=sg.theme_input_background_color(), text_color=sg.theme_input_text_color(), justification='r', expand_x=True, key='-RESULT-', font='_ 15')],
-						[sg.Button('Imprimir', size=(7, 1), expand_x=True), sg.Button('Vizualizar', size=(7, 1), expand_x=True), sg.Button('Salvar', size=(7, 1), expand_x=True)]	]
+						[sg.Button('Vizualizar', size=(7, 1), expand_x=True)]	]
 
 
 	layout_tab_group = [	[	sg.Tab('Moedas', layout_moedas), 
@@ -103,6 +108,64 @@ while True:
 	print(event)
 	if event in (None, 'Sair'): 
 		break
+
+	if event == 'Vizualizar':
+		tmp = '''=================================
+   BIG LAR MAGAZINE - TOME-ACU   
+=================================
+Data: 00/00/0000   Hora: 00:00:00
+Usuário: Lenardo      Caixa: 0017
+=================================
+  RESUMO DE FECHAMENTO DO CAIXA  
+=================================
+Recibos:         {}
+Venda avista:    {}
+Venda a prazo:   {}
+Cartao:          {}
+Carta credito:   {}
+Despedas:        {}
+=================================
+Total Recebido:  {}
+Total Dinheiro:  {}
+=================================
+Deposito Diario: {}
+=================================
+Moedas:          {}
+Cedulas:         {}
+Despesas:        {}
+Saidas:          {}
+Trocados:        {}
+=================================
+Valor D/ Caixa:  {}
+=================================
+Resumo do dia:   {}
+
+_________________________________
+         VISTO DO CAIXA          
+================================='''.format( 	print_values(window['-REC-'].get()),
+												print_values(window['-VDA-'].get()),
+												print_values(window['-VDAP-'].get()),
+												print_values(window['-CA-'].get()),
+												print_values(window['-CAC-'].get()),
+												print_values(window['-DSP-'].get()),
+												print_values(window['-DIS_TR-'].get()),
+												print_values(window['-DIS_TD-'].get()),
+												print_values(window['-DIS_DD-'].get()),
+												print_values(window['-MO-'].get()),
+												print_values(window['-CE-'].get()),
+												print_values(window['-DESP-'].get()),
+												print_values(window['-SAID-'].get()),
+												print_values(window['-TROC-'].get()),
+												print_values(window['-DICA-'].get()),  
+												print_values(window['-RESULT-'].get())  ) 
+		print(tmp)
+		lay = [ [sg.Text(tmp, font=('Consolas 11')) ], [sg.Combo(['Impressora Caixa', 'Impressora Cobranca', 'Impressora Gerente'], default_value='Impressora Caixa', expand_x=True, readonly=True), sg.Button('Imprimir')] ]
+		win = sg.Window('Test', lay)
+		while True:
+			event, values = win.read()
+			if event in (None, sg.WIN_CLOSED):
+				break							
+
 	
 	# Incio da logica do campo de R$ 0,05
 	if event == '-IN005-' and len(values['-IN005-']) and values['-IN005-'][-1] not in ('0123456789'):
