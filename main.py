@@ -1,6 +1,7 @@
 import PySimpleGUI as sg 
 from module import calc
 from module.realsymbol import Real as rs
+from datetime import datetime
 
 #coding: uft-8
 
@@ -11,6 +12,7 @@ a = b = c = d = e = f = g = h = i = j = k = l = rec = vda = vdap = ca = cac = ds
 terminal = 'User'
 func = 'Caixa'
 user = 'Ana'
+caixa = '0017'
 
 def real(x):
 	return calc.str_real_format( calc.insert_result( x))
@@ -20,6 +22,10 @@ def soma(x):
 
 def print_values(x):
 	x = ((16 - len(x)) * ' ' + x)
+	return x
+
+def print_user(x):
+	x = (x + (12 - len(x)) * ' ')
 	return x
 
 def main():
@@ -98,23 +104,12 @@ def main():
 
 	return sg.Window('Terminal: {} | Usuário: {}'.format(terminal ,user),  icon='ico.ico', size=(350,340), resizable=False, layout=layout, use_default_focus=False, return_keyboard_events=False) 
 
-window = main()
-
-while True: 
-
-	# Event Loop 
-	event, values = window.read() 
-
-	print(event)
-	if event in (None, 'Sair'): 
-		break
-
-	if event == 'Vizualizar':
-		tmp = '''=================================
+def impressao_page():
+	tmp = '''=================================
    BIG LAR MAGAZINE - TOME-ACU   
 =================================
-Data: 00/00/0000   Hora: 00:00:00
-Usuário: Lenardo      Caixa: 0017
+Data: {}   Hora: {}
+Usuário: {} Caixa: {}
 =================================
   RESUMO DE FECHAMENTO DO CAIXA  
 =================================
@@ -142,7 +137,12 @@ Resumo do dia:   {}
 
 _________________________________
          VISTO DO CAIXA          
-================================='''.format( 	print_values(window['-REC-'].get()),
+================================='''.format( 	
+												datetime.today().strftime('%d/%m/%Y'),
+												datetime.today().strftime('%H:%M:%S'),
+												print_user(user),
+												caixa,
+												print_values(window['-REC-'].get()),
 												print_values(window['-VDA-'].get()),
 												print_values(window['-VDAP-'].get()),
 												print_values(window['-CA-'].get()),
@@ -158,18 +158,28 @@ _________________________________
 												print_values(window['-TROC-'].get()),
 												print_values(window['-DICA-'].get()),  
 												print_values(window['-RESULT-'].get())  ) 
-		print(tmp)
-		lay = [ [sg.Text(tmp, font=('Consolas 11')) ], [sg.Combo(['Impressora Caixa', 'Impressora Cobranca', 'Impressora Gerente'], default_value='Impressora Caixa', expand_x=True, readonly=True), sg.Button('Imprimir')] ]
-		win = sg.Window('Página de Impressão', icon='ico.ico', layout=lay)
-		while True:
-			event, values = win.read()
-			if event in (None, sg.WIN_CLOSED):
-				break							
 
-	if event ==  'Limpar':
-		window.close()
-		win.close()
-		window = main()
+	lay = [ [sg.Text(tmp, font=('Consolas 11')) ], [sg.Combo(['Impressora Caixa', 'Impressora Cobranca', 'Impressora Gerente'], default_value='Impressora Caixa', expand_x=True, readonly=True), sg.Button('Imprimir')] ]
+	win = sg.Window('Página de Impressão', icon='ico.ico', layout=lay)
+	while True:
+		event, values = win.read()
+		if event in (None, sg.WIN_CLOSED):
+			break							
+
+window = main()
+
+while True: 
+
+	# Event Loop 
+	event, values = window.read() 
+
+	print(event)
+	if event in (None, 'Sair'): 
+		break
+
+	if event == 'Vizualizar':
+		impressao_page()
+
 	# Incio da logica do campo de R$ 0,05
 	if event == '-IN005-' and len(values['-IN005-']) and values['-IN005-'][-1] not in ('0123456789'):
 		window['-IN005-'].update(values['-IN005-'][:-1])
