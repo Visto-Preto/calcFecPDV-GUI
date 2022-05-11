@@ -15,7 +15,7 @@ class MainApp():
 
 		self.lmenu = [ ['Arquivo', ['Cadrastra Usuário', 'Calculara', 'Sair']], ['Sobre', ['Ajuda', 'Sobre o Desenvolvedor']] ]
 
-		self.lgroup = [	[sg.Text('Por favor entre com seus dados de login')], [sg.Column([ [sg.Text('Usuário:'), sg.Input('', size=(26,1))], [sg.Text('Senha  :'), sg.Input('', size=(26,1))], [sg.Text('')]],  element_justification='r', expand_x=True ) ]]
+		self.lgroup = [	[sg.Text('Por favor entre com seus dados de login')], [sg.Column([ [sg.Text('Usuário:'), sg.Input('', size=(26,1))], [sg.Text('Senha  :'), sg.Input('', password_char='*' ,size=(26,1))], [sg.Text('')]],  element_justification='r', expand_x=True ) ]]
 
 		self.l_login = [	[sg.Menu(self.lmenu)], [sg.Frame('Dados de Login', self.lgroup, expand_x=True)], 
 							[sg.Column([[sg.Button('Ok', size=(7,1)), sg.Button('Cancelar', size=(7,1))]], element_justification='r', expand_x=True)]	
