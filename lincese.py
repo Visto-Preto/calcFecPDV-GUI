@@ -1,0 +1,59 @@
+import PySimpleGUI as sg 
+import os, sqlite3, time, sys
+
+__author__ = "Visto-Preto"
+__version__ = "1.0.0"
+
+mainWindowIcon_32 = b'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAu5QTFRFAAAAgdLrf9Drf9DpgdHrgdLsf9LtgdTtgdPrgtLqgdLqgdPsf9TrgdPrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLqgdLrgdLrgNPrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLsgdLrgdLrgdLrgdLrgdLrgdLrgdLrgdLrgtLrgdLrgdLrgdLrgdLrgtPtg9Ttg9XugdPsgNLrgNHqYLHJUaK5UqO6UpmuUpKlVpeqeMbdgtPsgtLrhNPri9btfc7nK32SDV9yDmF1DVJjDDdCCzI8EDhDZavBg9TuhtTsueb0s+Tz4fT6DF5y4PT6/P7+/v7/idXsg9LqZLPJVaO5UpOmOnB+TYmaU5OmVZeqg9Pr8vv9+f3+8/v98vr9y+33y+32zO74ze/5wN/nwejyouDyhNXujNbt1/H41PL5btXvXdHuXtHuXc3pccvisOPwiNTsjdbtzO33v+j1vuj1u+n2G73nALTkALXkALDeAKDLL6/QruLwiNXs0e/4z+/3ze73zu73zO/4bNXvW9DuVs3rTMHeS7vYaMffjtft3fP66/j86vj76fj75Pb6ze72xuv0vejzitXsf9HrqeDx9vz+9/z+/f7/9fv9+v3+9fz94PX63vT62fL53/T62vL5ndzvgNHr0+/4wOj1tOTz0u/4yuz2suTzqODx2PL5r+Pyxev2vej0ltru8Pn9/P7/6ff83fP51vH40vD41fD42/P5kdjtxuv28Pr95fb7wOn1uuf0wur1tuXz3PP5rOLy4/X71/H54fX61PD4h9TsnNzw4vb85vj85/j92/T71fL60fH5mNvvgdLsh8ncj7rFkLrFVJSnEjlCEjlDFkFMFkFLDDM9CzE7K25/KGl6CzI7E0BLEj9KbrjPUZGkUpGk////2TPGWAAAAEZ0Uk5TAAAAAAAAAAAAAAAAAAMqcq3V9POuKwM5mN/8OBqK6ukZNcH+vzJG2NZCG8ACAjoCk95rpfLU6DeFAr690z80MYaUA6anbA+YvgoAAAABYktHRPlMZFfwAAAACXBIWXMAAES4AABEuAH3N9d6AAAChElEQVQ4y2NggAJGXj5+AUEhNzdhQRF+UTFGBlTAKCYuISnlBgVSkhLSKEqYGGVk5dxQgLysAiMzTJ6FUVFJ2Q0NKKuoMrJCjWdUU3fDAjQ0GcHWsDEqosi7e3h4eHp6erm5CSqCbWHU0obJeQOxj6+fv39AYFBwiJubthbQCEYdWYhsaJhbuFtYaERkVHRMbFx8QiJQTFaXkYFRD+r+pOSU1JTkpIjINKA8VIG8NCODvgTU/KT0jMyM9KzsnNy8/ILCIpAVbm4GugyikhD54pSS0rLS8orKquqKmtq6ei+wqKEoAz8k/LwbGkuBCkqbmltaW9vaOzqhYWrEIAD1QFd3T09vT09f/4SJkyZPmToNarExgyBMwfQZM2fNnDF7ztx58xcs7IApEGQQhipYtHjJUiBYtnT5ipUrV65a7Q0RF2aAqlyzdt36DRs3rNu0ecvWbdt3bNu5CyoBUxC6e8eesr3le/btP9B48NDhI0dDYQogVngfK19//MSSEydPbTu9/cz2s+caz0PsMIE6ck1v6YWLu9MvXd6y5cqsC1dPX7t+A6LAFOJN79U3T9zamH5zx5Hbty/cmdW94+r27rtQb4IDate9+w8ePnjwqOlxU9NjIADST556QwIKHNTPnr9ABy+fP4MEtS4osjxfvX4DAW/fQRmvX3lCIotRXB6oIDDuPRh8+PjpA4QVFwhUYGYOTA+6siAFn+Mg4MtXKOMzSIGFJShJyVi5hXwLhILvP2CsbyFu1gqM4EyhKugW4okBQtxsVBnZIcleUxBbsrexZeSAZAxORjttDGllK3subljW4sGS9RwUIObDM6+5AXLmdTTHzN9OfEbO4Oyv4eKKlP0BCbpYmGYkkRMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTktMDMtMjlUMTA6NTk6NTIrMDA6MDCxMXwMAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE5LTAzLTI5VDEwOjU5OjUyKzAwOjAwwGzEsAAAAEZ0RVh0c29mdHdhcmUASW1hZ2VNYWdpY2sgNi43LjgtOSAyMDE5LTAyLTAxIFExNiBodHRwOi8vd3d3LmltYWdlbWFnaWNrLm9yZ0F74sgAAAAYdEVYdFRodW1iOjpEb2N1bWVudDo6UGFnZXMAMaf/uy8AAAAYdEVYdFRodW1iOjpJbWFnZTo6aGVpZ2h0ADUxMsDQUFEAAAAXdEVYdFRodW1iOjpJbWFnZTo6V2lkdGgANTEyHHwD3AAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdlL3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNTUzODU3MTkyxeDSqQAAABN0RVh0VGh1bWI6OlNpemUAMjAuOUtCQt6Nn64AAAA/dEVYdFRodW1iOjpVUkkAZmlsZTovLy4vdXBsb2Fkcy81Ni92dFN5d2I5LzE4NTkvY2FzaGllcjJfMTE3OTUxLnBuZ7x2vmYAAAAASUVORK5CYII='
+mainWindowIcon_64 = b'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'
+
+class Control_DB():
+
+	def ver():
+		if os.path.isfile('settings/calcfecpdv.db'):
+			pass
+		else:
+			con = sqlite3.connect('settings/calcfecpdv.db')
+			cur = con.cursor()
+			cur.execute('''CREATE TABLE login_cfgs(theme TEXT,pathc  TEXT)''')
+			cur.execute('''INSERT INTO login_cfgs VALUES('{}', '{}')'''.format('DefaultNoMoreNagging', 'settings'))
+			con.commit()
+			con.close()
+
+	def login_cfgs_out():
+		con = sqlite3.connect('settings/calcfecpdv.db')
+		cur = con.cursor()
+		for row in cur.execute('''SELECT * FROM login_cfgs'''):
+			theme = row[0]
+		return theme
+		con.commit()
+		con.close()
+
+def theme():
+	Control_DB.ver()
+	return Control_DB.login_cfgs_out()
+
+sg.theme(theme())
+
+class MainLicense():
+	def __init__(self):
+		pass
+	
+	def layout_page(self):
+		
+		self.lmenu = [ ['Arquivo', ['Sair']], ['Sobre', ['Ajuda', 'Sobre o Desenvolvedor']] ]
+		self.lgroup = [	[sg.Text('Sua licensa espirou! ')], [sg.Column([ [sg.Text('Usuário:'), sg.Input('', size=(26,1), key='-USR-')], [sg.Text('Serial:'), sg.Input('', size=(26,1), key='-SERIAL-')], [sg.Text('', key='-LBL-')]],  element_justification='r', expand_x=True ) ]]
+		self.layout = [	[sg.Menu(self.lmenu)], [sg.Frame('Dados de atualizacão da licensa', self.lgroup, expand_x=True)], 
+							[sg.Column([[sg.Button('Confirmar', size=(7,1)), sg.Button('Sair', size=(7,1))]], element_justification='r', expand_x=True)]	]
+		self.window = sg.Window('Atualização de licensa', size=(350,215), finalize=True,resizable=False, return_keyboard_events=True,layout=self.layout, keep_on_top=True,  grab_anywhere=True, use_custom_titlebar=True, titlebar_icon=mainWindowIcon_32, titlebar_font=(sg.DEFAULT_FONT, 12, 'bold'), icon=mainWindowIcon_64)
+		self.window.read(timeout=1)
+		while True:
+			self.event, self.values = self.window.read()
+			if self.event in ('Sair', None, sg.WIN_CLOSED):
+				self.window.close()
+				sys.exit()
+			if self.event == 'Confirmar':
+				self.window['-LBL-'].Update('Serial invalido!')
+				
+
+MainLicense().layout_page()
