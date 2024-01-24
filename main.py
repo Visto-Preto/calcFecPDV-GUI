@@ -4,8 +4,9 @@ import PySimpleGUI as sg
 from module import calc
 from module.realsymbol import Real as rs
 from module.pages import Page_Printers
+from datetime import datetime
 
-import os, sqlite3, win32print, win32api, time, sys
+import os, sqlite3, win32print, win32api, time, sys, requests
 
 __author__ = "Visto-Preto"
 __version__ = "1.0.0"
@@ -866,4 +867,51 @@ class MainApp():
 				sg.theme(theme())
 				MainApp.configs(self)
 
-MainApp().login()
+	def validation(self):
+
+		self.lmenu = [ ['Arquivo', ['Sair']], ['Sobre', ['Sobre o Desenvolvedor']] ]
+
+		self.lgroup = [	[sg.Text('Insira sua licensa')], 
+							[sg.Column([ 
+											[sg.Text('Serial  :'), sg.Input('',size=(9,1), key='-PWD1-'), sg.Input('',size=(9,1), key='-PWD2-'),sg.Input('',size=(9,1), key='-PWD3-')], 
+											[sg.Text('',)], [sg.Text('', key='-LBL-')]
+										], 
+							element_justification='r', expand_x=True ) ]]
+
+		self.layout = [	[sg.Menu(self.lmenu)], [sg.Frame('Dados da licensa', self.lgroup, expand_x=True)], 
+							[sg.Column([[sg.Button('OK', size=(7,1)), sg.Button('Cancelar', size=(7,1))]], element_justification='r', expand_x=True)]
+								] 
+		self.window = sg.Window('Ativação', size=(350,210),return_keyboard_events=True, layout=self.layout, keep_on_top=True,  grab_anywhere=True, use_custom_titlebar=True, titlebar_icon=mainWindowIcon_32, titlebar_font=(sg.DEFAULT_FONT, 12, 'bold'), icon=mainWindowIcon_64)
+		self.window.read(timeout=1)
+		while True:
+			self.event, self.values = self.window.read()
+			if self.event in ('Sair', None, sg.WIN_CLOSED):
+				self.window.close()
+				sys.exit()
+			if self.event in ('Cancelar', None, sg.WIN_CLOSED):
+				self.window.close()
+				sys.exit()
+			if self.event in ('OK', None, sg.WIN_CLOSED):
+				#XLR-LVS-LIC
+				license = '{}-{}-{}'.format(self.values['-PWD1-'], self.values['-PWD2-'], self.values['-PWD3-']).upper()
+				url = 'https://raw.githubusercontent.com/Visto-Preto/calcFecPDV-GUI/license/{}/license'.format(license)
+				response = requests.get(url)
+				if response.status_code == 200:
+					with open("settings/license", 'w') as vf:
+						vf.write(response.text)
+					self.window.close()
+					MainApp().login()
+				else:
+					self.window['-PWD1-'].Update('')
+					self.window['-PWD2-'].Update('')
+					self.window['-PWD3-'].Update('')
+					self.window['-LBL-'].Update('Dados inválido, por favor contate o Desenvolvedor!')
+
+with open("settings/license") as license:
+	license = int(license.read())
+check_license = int(datetime.today().strftime('%Y%m%d'))
+
+if __name__ == '__main__' and check_license <= license:
+	MainApp().login()
+else:
+	MainApp().validation()

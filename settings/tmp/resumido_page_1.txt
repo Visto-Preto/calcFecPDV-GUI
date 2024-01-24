@@ -1,24 +1,24 @@
 =================================
    BIG LAR MAGAZINE - TOME-ACU    
 =================================
-Data: 06/06/2023   Hora: 13:01:19
+Data: 23/01/2024   Hora: 12:59:07
 Usuário: Ana
 =================================
   RESUMO DE FECHAMENTO DO CAIXA  
            (Resumido)            
 =================================
-Total Recebido:       R$ 3.549,21
-Total Dinheiro:       R$ 3.549,21
+Total Recebido:         R$ 783,72
+Total Dinheiro:         R$ 783,72
 =================================
-Moedas:                   R$ 0,00
-Cedulas:                R$ 192,00
-Despesas:               R$ 100,00
-Saidas:               R$ 3.400,00
-Trocados:               R$ 141,50
+Moedas:                   R$ 6,25
+Cedulas:                R$ 908,00
+Despesas:                R$ 15,00
+Saidas:                   R$ 0,00
+Trocados:               R$ 145,50
 =================================
-Valor do Caixa:       R$ 3.550,50
+Valor do Caixa:         R$ 783,75
 =================================
-Resumo do dia:            R$ 1,29
+Resumo do dia:            R$ 0,03
 
 _________________________________
          VISTO DO CAIXA          
