@@ -891,21 +891,83 @@ class MainApp():
 			if self.event in ('Cancelar', None, sg.WIN_CLOSED):
 				self.window.close()
 				sys.exit()
-			if self.event in ('OK', None, sg.WIN_CLOSED):
-				#XLR-LVS-LIC
+			if self.event in ('OK'):
 				license = '{}-{}-{}'.format(self.values['-PWD1-'], self.values['-PWD2-'], self.values['-PWD3-']).upper()
 				url = 'https://raw.githubusercontent.com/Visto-Preto/calcFecPDV-GUI/license/{}/license'.format(license)
 				response = requests.get(url)
 				if response.status_code == 200:
-					with open("settings/license", 'w') as vf:
-						vf.write(response.text)
+					user = requests.get('https://raw.githubusercontent.com/Visto-Preto/calcFecPDV-GUI/license/{}/user'.format(license)).text
+					user = user[:-1]
+					dia = response.text[6:8]
+					mes = response.text[4:6]
+					ano = response.text[0:4]
+					validade = '{}/{}/{}'.format(dia, mes, ano)
+					if int(datetime.today().strftime('%Y%m%d')) <= int(response.text):
+						status_v = 'Válida'
+					else:
+						status_v = 'Inválida'
+
 					self.window.close()
-					MainApp().login()
+					MainApp().page_license(license, user, validade, status_v, str(response.text))
 				else:
 					self.window['-PWD1-'].Update('')
 					self.window['-PWD2-'].Update('')
 					self.window['-PWD3-'].Update('')
 					self.window['-LBL-'].Update('Dados inválido, por favor contate o Desenvolvedor!')
+			if len(self.values['-PWD1-']) > 2:
+				self.window['-PWD1-'].Update(self.values['-PWD1-'].upper())
+				self.window['-PWD2-'].set_focus()
+			if len(self.values['-PWD2-']) > 2:
+				self.window['-PWD2-'].Update(self.values['-PWD2-'].upper())
+				self.window['-PWD3-'].set_focus()
+			if len(self.values['-PWD3-']) > 2:
+				self.window['-PWD3-'].Update(self.values['-PWD3-'].upper())
+				self.window['-PWD1-'].set_focus()
+
+
+	def page_license(self, x, y, z,s, li):
+		self.lmenu = [ ['Arquivo', ['Sair']], ['Sobre', ['Sobre o Desenvolvedor']] ]
+
+		self.lgroup = [
+							[sg.Column([ 
+											[sg.Text('Serial  : {}'.format(x))], 
+											[sg.Text('Usuário : {}'.format(y))],
+											[sg.Text('Validade: {}'.format(z))]
+										], 
+							element_justification='l', expand_x=True ) ],
+							[ sg.Column([
+								[sg.Text('Status da licensa: {}'.format(s), key='-LBL-')]], element_justification='c', expand_x=True ) ]
+							
+						]
+
+		
+
+		self.layout = [	[sg.Menu(self.lmenu)], [sg.Frame('Dados da licensa', self.lgroup, expand_x=True)], 
+							[sg.Column([
+										[sg.Button('Ativar', size=(7,1)),sg.Button('Sair', size=(7,1))]
+										], element_justification='r', expand_x=True)]
+								] 
+		self.window = sg.Window('Ativação', size=(350,220),return_keyboard_events=True, layout=self.layout, keep_on_top=True,  grab_anywhere=True, use_custom_titlebar=True, titlebar_icon=mainWindowIcon_32, titlebar_font=(sg.DEFAULT_FONT, 12, 'bold'), icon=mainWindowIcon_64)
+		self.window.read(timeout=1)
+		while True:
+			self.event, self.values = self.window.read()
+			if self.event in ('Sair', None, sg.WIN_CLOSED):
+				self.window.close()
+				sys.exit()
+			if self.event in ('Ativar'):
+				if s == 'Válida':
+					self.window.close()
+					with open("settings/license", 'w') as vf:
+						vf.write(li)
+					self.window.close()
+					MainApp().login()
+				else:
+					self.window['-LBL-'].Update('Esta licensa é inválida pois esta vencida.')
+if os.path.isfile('settings/license'):
+	pass
+else:
+	with open("settings/license", 'w') as vf:
+		vf.write("0")
 
 with open("settings/license") as license:
 	license = int(license.read())
@@ -915,3 +977,4 @@ if __name__ == '__main__' and check_license <= license:
 	MainApp().login()
 else:
 	MainApp().validation()
+
